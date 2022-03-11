@@ -42,16 +42,14 @@
                   </v-card-text>
                   <v-card-text>
                     <v-alert outlined type="warning" prominent border="left">
-                      Correo electrónico del administrador: admin@materio.com /
-                      Contraseña: admin Correo electrónico del cliente:
-                      client@materio.com / Pase: cliente
+                      Bienvenido recuerda la credencial de acceso: 7865470213
                     </v-alert>
                   </v-card-text>
                   <v-card-text>
                     <v-form ref="form" v-model="valid" lazy-validation>
                       <v-text-field
                         v-model="mobilephone"
-                        label="Tel"
+                        label="Teléfono"
                         required
                         outlined
                       ></v-text-field>
@@ -102,7 +100,7 @@ export default {
     //  localStorage.clear();
       this.$root.app_bar = true;
       const params = {
-        mobilephone: 7865470213,
+        mobilephone: this.mobilephone,
       };
       var url =
         "https://v3.tissini.app/api/v3/login/client?mobilephone=" +
