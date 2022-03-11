@@ -8,8 +8,6 @@ import axios from 'axios';
 import VueAxios from 'vue-axios'
 
 
-
-
 Vue.use(VueAxios, axios);
 // Vue.prototype.$axios = axios;
 Vue.use(VueRouter);
@@ -17,21 +15,7 @@ Vue.use(Vuetify);
 
 Vue.config.productionTip = false
 
-Vue.component(
-    "categorias-component",
-    require("./components/categorias/CategoriasComponent.vue").default
-);
-Vue.component(
-    "auth-component",
-    require("./components/AuthComponent.vue").default
-);
 
-// let auth_component = {
-//     template: "<auth-component></auth-component>"
-// };
-// let categorias_component = {
-//     template: "<categorias-component></categorias-component>"
-// };
 const router = new VueRouter({
     mode: "history",
     routes: [{

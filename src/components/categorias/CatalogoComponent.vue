@@ -1,48 +1,65 @@
 <template>
-  <!-- <v-card class="mx-auto" style="overflow-y: auto; max-height: 600px"> -->
-  <v-container style="height: 100vh;" >
-
-    <barra-navegacion :regresar="true" :validarCarrito="validarCarrito"></barra-navegacion>
-
-    <v-layout style="height: 100vh;" wrap justify-center align-center class="mt-3 velmld-parent">
-      <v-col cols="12" md="12">
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="card in cards_products" :key="card.title"> <v-card  class="mt-2">
-          <v-img contain
-            :src="$root.cdn + card.images[0].url"
-            class="white--text align-end"
-            height="260px"
-            min-width="160"
-            max-height="260px"
-          >
-            <v-card-title v-text="card.title"></v-card-title>
-          </v-img>
-
-          <v-card-actions>
-            <v-btn class="text-capitalize" depressed rounded color="primary" @click="dialogProducto(card)">
-              <v-icon left>mdi-cart-plus</v-icon>
-              Agregar
-            </v-btn>
-
-            <v-spacer></v-spacer>
-            <div class="text-xs-right">
-              <span class="item-price">${{ card.price }}</span>
-            </div>
-          </v-card-actions>
-        </v-card></swiper-slide>
-       
-        <div class="swiper-button-prev1" slot="button-prev">
-           <v-icon large style="margin-top: 64px">mdi-chevron-left-circle</v-icon>
-        </div>
-    <div class="swiper-button-next1" slot="button-next">
-      <v-icon large style="margin-top: 64px">mdi-chevron-right-circle</v-icon>
-    </div>
-
-        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-      </swiper>
-       
+  <v-container>
+    <v-row>
+      <v-col cols="12" md="12" sm="12">
+        <barra-navegacion
+          :regresar="true"
+          :validarCarrito="validarCarrito"
+        ></barra-navegacion>
       </v-col>
-    </v-layout>
+      <v-col cols="12" md="12" sm="12" class="mt-5">
+        <v-card class="mx-auto" elevation="0" max-width="900">
+          <v-card-title
+            class="white"
+            style="position: sticky; top: 56px; z-index: 1"
+          >
+            Catalogo de productos
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col
+                md="4"
+                cols="12"
+                sm="12"
+                v-for="card in cards_products"
+                :key="card.title"
+              >
+                <v-card min-height="350" class="mt-2">
+                  <v-img
+                    :src="$root.cdn + card.images[0].url"
+                    class="white--text align-end"
+                    height="300"
+                    min-height="300"
+                    max-height="300"
+                  >
+                    <v-card-title v-text="card.title"></v-card-title>
+                  </v-img>
+
+                  <v-card-actions>
+                    <v-btn
+                      class="text-capitalize"
+                      depressed
+                      rounded
+                      color="primary"
+                      @click="dialogProducto(card)"
+                    >
+                      <v-icon left>mdi-cart-plus</v-icon>
+                      Agregar
+                    </v-btn>
+
+                    <v-spacer></v-spacer>
+                    <div class="text-xs-right">
+                      <span class="item-price">${{ card.price }}</span>
+                    </div>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <v-dialog v-model="dialosAdd" persistent max-width="400">
       <v-card class="round">
         <v-card-title class="pa-1">
@@ -111,7 +128,14 @@
                 </v-btn>
               </v-col>
               <v-col class="pt-0 px-0" md="12" sm="12" cols="12">
-                <v-btn @click="cancelarIntento" class="text-capitalize" block rounded outlined depressed>
+                <v-btn
+                  @click="cancelarIntento"
+                  class="text-capitalize"
+                  block
+                  rounded
+                  outlined
+                  depressed
+                >
                   Cancelar
                 </v-btn>
               </v-col>
@@ -128,13 +152,9 @@
 <script>
 import navigationComponent from "../NavigationComponent.vue";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
 export default {
   components: {
     "barra-navegacion": navigationComponent,
-    Swiper,
-    SwiperSlide,
   },
   data: () => ({
     banners: ["/1.jpg", "/2.jpg", "/3.jpg"],
@@ -142,10 +162,10 @@ export default {
       slidesPerView: 4,
       slidesPerColumn: 3,
       spaceBetween: 30,
-       navigation: {
-            nextEl: '.swiper-button-next1',
-            prevEl: '.swiper-button-prev1'
-          },
+      navigation: {
+        nextEl: ".swiper-button-next1",
+        prevEl: ".swiper-button-prev1",
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -236,7 +256,7 @@ export default {
           console.error(err);
         });
     },
-    
+
     multiVendedor() {
       var url =
         "https://v3.tissini.app/api/v3/categories/" +
@@ -260,48 +280,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.velmld-parent {
-  position: relative !important;
-}
-.item-price {
-  font-size: 20px;
-  color: #ee7d39;
-}
-</style>
-
-<style lang="scss" scoped>
-
-.swiper-button-prev1{
-      position: fixed;
-    z-index: 10;
-    height: 100%;
-    width: 50px;
-    top: 0;
-    align-items: center;
-    display: flex;
-    left: 2px;
-    justify-content: center;
-}
-.swiper-button-next1{
-      position: fixed;
-    z-index: 10;
-    height: 100%;
-    width: 50px;
-    top: 0;
-    align-items: center;
-    display: flex;
-    right: 2px;
-    justify-content: center;
-}
-
-.swiper {
-  height: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-
-  .swiper-slide {
-    height: 300px;
-  }
-}
-</style>

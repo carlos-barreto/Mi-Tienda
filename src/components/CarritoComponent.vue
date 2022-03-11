@@ -199,8 +199,8 @@
   </v-container>
 </template>
 <script>
-import navigationComponent from "./NavigationComponent.vue";
 import formularioComponent from "./FormularioPagoComponent.vue";
+import navigationComponent from "./NavigationComponent.vue";
 import axios from "axios";
 export default {
   components: {
